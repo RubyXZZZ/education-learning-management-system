@@ -7,7 +7,6 @@ import type { SessionRes } from '../types';
 
 // ==================== Types ====================
 
-
 interface CurrentUser {
     id: string;
     email: string;

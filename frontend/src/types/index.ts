@@ -350,8 +350,6 @@ export interface EnrollmentList {
     // progress: number | null;
     finalGrade: number | null;
     // letterGrade: string | null;
-    // passed: boolean | null;
-    // attendanceRate: number;
 }
 
 export interface EnrollmentRes {
@@ -376,11 +374,6 @@ export interface EnrollmentRes {
     status: EnrollmentStatus;
     finalGrade: number | null;
     // letterGrade: string | null;
-    // passed: boolean | null;
-    // attendanceRate: number;
-    // totalClasses: number;
-    // attendedClasses: number;
-    // absentClasses: number;
     lateClasses: number;
     instructorId: string;
     instructorName: string;

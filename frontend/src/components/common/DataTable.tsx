@@ -131,13 +131,7 @@ export function DataTable<T extends Record<string, any>>({
 
 // Helper functions for common render patterns
 export const TableRenderers = {
-    /**
-     * Render as badge with color config
-     * Pass the field key to read from item
-     * @example
-     * { key: 'status', header: 'Status', render: TableRenderers.badge('status', USER_STATUS) }
-     * { key: 'courseFormat', header: 'Format', render: TableRenderers.badge('courseFormat', COURSE_FORMAT) }
-     */
+
     badge: (fieldKey: string, config: Record<string, { color?: string; label: string; value: string }>) =>
         (item: any) => {
             // Get the actual value from the item using the field key
@@ -173,13 +167,7 @@ export const TableRenderers = {
             </button>
         ),
 
-    /**
-     * Render action buttons
-     * @example
-     * { key: 'actions', header: 'Actions', render: TableRenderers.actions([
-     *   { label: 'Edit', onClick: (item) => edit(item) }
-     * ])}
-     */
+    //Render action buttons
     actions: (buttons: Array<{
         label: string;
         variant?: 'ghost' | 'primary' | 'secondary' | 'danger';
