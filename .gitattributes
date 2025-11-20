@@ -1,15 +1,28 @@
-# Exclude package manager files
-frontend/package-lock.json linguist-generated
-frontend/yarn.lock linguist-generated
+# Package manager lockfiles (usually 20k+ lines)
+**/package-lock.json linguist-generated
+**/yarn.lock linguist-generated
+**/pnpm-lock.yaml linguist-generated
 
-# Exclude config files
-frontend/tsconfig.json linguist-generated
-frontend/vite.config.ts linguist-generated
-frontend/tailwind.config.js linguist-generated
+# Frontend config files
+**/*config*.ts linguist-generated
+**/*config*.js linguist-generated
+**/tsconfig*.json linguist-generated
+**/vite.config.* linguist-generated
+**/tailwind.config.* linguist-generated
+**/.eslintrc* linguist-generated
+**/.prettierrc* linguist-generated
 
-# Exclude backend config
-backend/pom.xml linguist-generated
+# Backend config
+**/pom.xml linguist-generated
+**/application*.properties linguist-generated
+**/application*.yml linguist-generated
 
-# Mark documentation
+# Documentation
 *.md linguist-documentation
-README.md linguist-documentation
+
+# Test files (optional - if you want to exclude)
+**/test/** linguist-vendored
+**/tests/** linguist-vendored
+**/*.test.ts linguist-vendored
+**/*.test.tsx linguist-vendored
+**/*.spec.ts linguist-vendored
