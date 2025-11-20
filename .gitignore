@@ -1,0 +1,46 @@
+# ============================================
+# Root Level .gitignore for EMS Monorepo
+# ============================================
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor (root level)
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*~
+
+# Environment Variables (root level)
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Personal Development Files
+notes/
+notes.txt
+todo.txt
+scratch/
+temp/
+tmp/
+*.tmp
+*.bak
+
+# Logs (root level)
+*.log
+logs/
+
+# Documentation Build
+docs/build/
+docs/_build/.idea/
+*.iml
