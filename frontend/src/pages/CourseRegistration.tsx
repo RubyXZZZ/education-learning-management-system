@@ -4,7 +4,6 @@ import { PageHeader } from '../components/common/PageHeader';
 import { FilterSelect } from '../components/common/FilterSelect';
 import { Button } from '../components/common/Button';
 import { Badge } from '../components/common/Badge';
-import { ConfirmDialog } from '../components/common/ConfirmDialog';
 import { COLORS } from '../constants/colors';
 import { sectionApi, enrollmentApi } from '../services/api';
 import { useSession, useAuth } from '../contexts/AppContext';
@@ -25,12 +24,6 @@ export const CourseRegistration: React.FC<CourseRegistrationProps> = ({ onViewEn
     const [error, setError] = useState<string | null>(null);
 
     const [sessionFilter, setSessionFilter] = useState<string>('');
-
-    const [showEnrollConfirm, setShowEnrollConfirm] = useState(false);
-    const [selectedSection, setSelectedSection] = useState<SectionRes | null>(null);
-
-    const [showDropConfirm, setShowDropConfirm] = useState(false);
-    const [droppingEnrollment, setDroppingEnrollment] = useState<EnrollmentRes | null>(null);
 
     useEffect(() => {
         // Set default to current/upcoming session
@@ -82,49 +75,43 @@ export const CourseRegistration: React.FC<CourseRegistrationProps> = ({ onViewEn
         }
     };
 
-    const handleEnrollClick = (section: SectionRes) => {
-        setSelectedSection(section);
-        setShowEnrollConfirm(true);
-    };
+    const handleEnrollClick = async (section: SectionRes) => {
+        if (!currentUser) return;
 
-    const confirmEnroll = async () => {
-        if (!selectedSection || !currentUser) return;
+        const confirmMsg = `Enroll in ${section.courseCode} - ${section.courseName}?\n\nSection ${section.sectionCode} | ${section.instructorName} | ${section.schedule} | ${section.hoursPerWeek} hours/week`;
+
+        if (!confirm(confirmMsg)) return;
 
         try {
             await enrollmentApi.enroll({
                 studentId: currentUser.id,
-                courseSectionId: selectedSection.id
+                courseSectionId: section.id
             });
 
-            setShowEnrollConfirm(false);
-            setSelectedSection(null);
             await loadData();
             alert('Enrolled successfully!');
         } catch (err: any) {
-            alert('Failed to enroll: ' + (err.response?.data?.message || err.message));
+            const errorMsg = err.response?.data?.message || err.message || 'Unknown error';
+            alert('Failed to enroll: ' + errorMsg);
         }
     };
 
-    const handleDropClick = (enrollment: EnrollmentRes) => {
-        setDroppingEnrollment(enrollment);
-        setShowDropConfirm(true);
-    };
+    const handleDropClick = async (enrollment: EnrollmentRes) => {
+        const confirmMsg = `Drop ${enrollment.courseCode} - ${enrollment.courseName}?\n\nThis action will remove you from the course. You may re-enroll if seats are available.`;
 
-    const confirmDrop = async () => {
-        if (!droppingEnrollment) return;
+        if (!confirm(confirmMsg)) return;
 
         try {
             await enrollmentApi.drop({
-                enrollmentId: droppingEnrollment.id,
+                enrollmentId: enrollment.id,
                 dropReason: 'Dropped by student'
             });
 
-            setShowDropConfirm(false);
-            setDroppingEnrollment(null);
             await loadData();
             alert('Course dropped successfully!');
         } catch (err: any) {
-            alert('Failed to drop course: ' + (err.response?.data?.message || err.message));
+            const errorMsg = err.response?.data?.message || err.message || 'Unknown error';
+            alert('Failed to drop course: ' + errorMsg);
         }
     };
 
@@ -224,7 +211,7 @@ export const CourseRegistration: React.FC<CourseRegistrationProps> = ({ onViewEn
                                 style={{ backgroundColor: COLORS.cream }}
                             >
                                 <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-2">
+                                    <div className="flex items-center space-x-3 mb-2">
                                         <h4 className="font-bold text-base" style={{ color: COLORS.dark }}>
                                             {enrollment.courseCode} - Section {enrollment.sectionCode}
                                         </h4>
@@ -422,42 +409,6 @@ export const CourseRegistration: React.FC<CourseRegistrationProps> = ({ onViewEn
                     </div>
                 )}
             </div>
-
-            {/* Enroll Confirmation Dialog - Student Only */}
-            {selectedSection && (
-                <ConfirmDialog
-                    isOpen={showEnrollConfirm}
-                    title="Confirm Enrollment"
-                    message={`Enroll in ${selectedSection.courseCode} - ${selectedSection.courseName}?`}
-                    confirmText="Enroll Now"
-                    cancelText="Cancel"
-                    variant="default"
-                    warningNote={`Section ${selectedSection.sectionCode} | ${selectedSection.instructorName} | ${selectedSection.schedule} | ${selectedSection.hoursPerWeek} hours/week`}
-                    onConfirm={confirmEnroll}
-                    onCancel={() => {
-                        setShowEnrollConfirm(false);
-                        setSelectedSection(null);
-                    }}
-                />
-            )}
-
-            {/* Drop Confirmation Dialog - Student Only */}
-            {droppingEnrollment && (
-                <ConfirmDialog
-                    isOpen={showDropConfirm}
-                    title="Drop Course"
-                    message={`Drop ${droppingEnrollment.courseCode} - ${droppingEnrollment.courseName}?`}
-                    confirmText="Drop Course"
-                    cancelText="Cancel"
-                    variant="danger"
-                    warningNote="This action will remove you from the course. You may re-enroll if seats are available."
-                    onConfirm={confirmDrop}
-                    onCancel={() => {
-                        setShowDropConfirm(false);
-                        setDroppingEnrollment(null);
-                    }}
-                />
-            )}
         </div>
     );
 };
