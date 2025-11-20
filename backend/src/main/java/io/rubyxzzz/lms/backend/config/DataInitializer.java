@@ -11,10 +11,15 @@
 //import java.time.LocalDate;
 //import java.time.LocalDateTime;
 //
+
+
 ///**
 // * Initialize demo data for development/testing
 // * Run once on application startup
 // */
+
+
+
 //@Slf4j
 //@Component
 //@RequiredArgsConstructor
@@ -28,6 +33,7 @@
 //    private final EnrollmentRepo enrollmentRepository;
 //    private final ApplicationRepo applicationRepository;
 //
+
 //    @Override
 //    public void run(ApplicationArguments args) {
 //        // Only initialize if database is empty
@@ -66,6 +72,7 @@
 //        }
 //    }
 //
+
 //    private void createSessions() {
 //        log.info("Creating sessions...");
 //
@@ -159,7 +166,7 @@
 //        instructor.setFirstName(firstName);
 //        instructor.setLastName(lastName);
 //        instructor.setEmail(email);
-//        instructor.setPassword("instructor123"); // TODO: Hash password
+//        instructor.setPassword("instructor123");
 //        instructor.setPhone("555-010" + employeeId.substring(employeeId.length() - 1));
 //        instructor.setEmployeeId(employeeId);
 //        instructor.setDepartment(department);
@@ -530,4 +537,65 @@
 //
 //        log.info("Created 5 applications");
 //    }
-//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// set
