@@ -1,0 +1,15 @@
+# Exclude package manager files
+frontend/package-lock.json linguist-generated
+frontend/yarn.lock linguist-generated
+
+# Exclude config files
+frontend/tsconfig.json linguist-generated
+frontend/vite.config.ts linguist-generated
+frontend/tailwind.config.js linguist-generated
+
+# Exclude backend config
+backend/pom.xml linguist-generated
+
+# Mark documentation
+*.md linguist-documentation
+README.md linguist-documentation
