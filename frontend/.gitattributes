@@ -1,0 +1,13 @@
+# Package manager lockfiles
+**/package-lock.json linguist-generated
+**/yarn.lock linguist-generated
+**/pnpm-lock.yaml linguist-generated
+
+# Frontend config files
+**/*config*.ts linguist-generated
+**/*config*.js linguist-generated
+**/tsconfig*.json linguist-generated
+**/vite.config.* linguist-generated
+**/tailwind.config.* linguist-generated
+**/.eslintrc* linguist-generated
+**/.prettierrc* linguist-generated
