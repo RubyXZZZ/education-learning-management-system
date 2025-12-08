@@ -1,4 +1,5 @@
-package io.rubyxzzz.lms.backend.config;//package io.rubyxzzz.lms.backend.config;
+package io.rubyxzzz.lms.backend.config;
+//package io.rubyxzzz.lms.backend.config;
 //
 //import io.rubyxzzz.lms.backend.model.*;
 //import io.rubyxzzz.lms.backend.repository.*;
@@ -13,7 +14,7 @@ package io.rubyxzzz.lms.backend.config;//package io.rubyxzzz.lms.backend.config;
 //
 
 
-///**
+//**
 // * Initialize demo data for development/testing
 // * Run once on application startup
 // */
@@ -198,7 +199,7 @@ package io.rubyxzzz.lms.backend.config;//package io.rubyxzzz.lms.backend.config;
 //        student.setFirstName(firstName);
 //        student.setLastName(lastName);
 //        student.setEmail(email);
-//        student.setPassword("student123"); // TODO: Hash password
+//        student.setPassword("student123");
 //        student.setPhone("555-020" + studentId.substring(studentId.length() - 1));
 //        student.setStudentId(studentId);
 //        student.setStudentType(StudentType.LOCAL);
@@ -1819,6 +1820,88 @@ package io.rubyxzzz.lms.backend.config;//package io.rubyxzzz.lms.backend.config;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// set
 
 
 
