@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {ChevronRight, Users, BookOpen, GraduationCap, Award } from 'lucide-react';
+import {ChevronRight, Users, BookOpen} from 'lucide-react';
 import { COLORS } from '../constants/colors';
-import { studentApi, instructorApi, sectionApi, enrollmentApi } from '../services/api';
+import { studentApi, courseApi, sectionApi, enrollmentApi } from '../services/api';
 import { useAuth } from '../contexts/AppContext';
 import { ENROLLMENT_STATUS, SECTION_STATUS } from '../types';
 import { Badge } from '../components/common/Badge';
@@ -251,12 +251,11 @@ const InstructorContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({
 };
 
 // Admin Content Component
+// Admin Content Component
 const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNavigate }) => {
     const [stats, setStats] = useState({
         totalStudents: 0,
-        totalSections: 0,
-        totalEnrollments: 0,
-        totalInstructors: 0
+        totalCourses: 0
     });
     const [loading, setLoading] = useState(true);
 
@@ -266,18 +265,17 @@ const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNa
 
     const loadStats = async () => {
         try {
-            const [studentsRes, sectionsRes, enrollmentsRes, instructorsRes] = await Promise.all([
+            const [studentsRes, coursesRes] = await Promise.all([
                 studentApi.getAll(),
-                sectionApi.getList(),
-                enrollmentApi.getList(),
-                instructorApi.getAll()
+                courseApi.getAll()  // Use Course API
             ]);
 
+            console.log('Students response:', studentsRes.data);
+            console.log('Courses response:', coursesRes.data);
+
             setStats({
-                totalStudents: studentsRes.data.length,
-                totalSections: sectionsRes.data.length,
-                totalEnrollments: enrollmentsRes.data.length,
-                totalInstructors: instructorsRes.data.length
+                totalStudents: studentsRes.data?.length || 0,
+                totalCourses: coursesRes.data?.length || 0
             });
         } catch (err) {
             console.error('Error loading stats:', err);
@@ -292,8 +290,7 @@ const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNa
 
     return (
         <>
-            {/* Quick Stats Cards */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 gap-4">
                 <StatCard
                     icon={<Users size={24} style={{ color: COLORS.orange }} />}
                     value={stats.totalStudents}
@@ -302,21 +299,9 @@ const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNa
                 />
                 <StatCard
                     icon={<BookOpen size={24} style={{ color: COLORS.orange }} />}
-                    value={stats.totalSections}
-                    label="Sections"
+                    value={stats.totalCourses}
+                    label="Courses"
                     onClick={() => onNavigate('courses-management')}
-                />
-                <StatCard
-                    icon={<GraduationCap size={24} style={{ color: COLORS.orange }} />}
-                    value={stats.totalEnrollments}
-                    label="Enrollments"
-                    onClick={() => onNavigate('courses-management')}
-                />
-                <StatCard
-                    icon={<Award size={24} style={{ color: COLORS.orange }} />}
-                    value={stats.totalInstructors}
-                    label="Instructors"
-                    onClick={() => onNavigate('users-management')}
                 />
             </div>
         </>
