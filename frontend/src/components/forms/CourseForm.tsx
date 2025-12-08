@@ -155,12 +155,10 @@ export const CourseForm: React.FC<CourseFormProps> = ({
                             value={formData.courseCode}
                             disabled={mode === 'edit'}
                             onChange={(e) => setFormData({ ...formData, courseCode: e.target.value.toUpperCase() })}
-                            placeholder="ESL-LS-L1"
                             className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed font-mono"
                             style={{ borderColor: COLORS.bg }}
                         />
                         <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                            Format: PROGRAM-TYPE-LEVEL (e.g., ESL-LS-L1, BE-MN)
                         </p>
                     </div>
 
@@ -173,7 +171,6 @@ export const CourseForm: React.FC<CourseFormProps> = ({
                             type="text"
                             value={formData.courseName}
                             onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
-                            placeholder="Listening & Speaking"
                             className="w-full px-3 py-2 border rounded-lg"
                             style={{ borderColor: COLORS.bg }}
                         />
@@ -213,11 +210,8 @@ export const CourseForm: React.FC<CourseFormProps> = ({
                             max={20}
                             className="w-full px-3 py-2 border rounded-lg"
                             style={{ borderColor: COLORS.bg }}
-                            placeholder="7"
                         />
-                        <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                            Typically: 7 hours for main courses (LS/RW), 4 hours for integrated skills (IS)
-                        </p>
+                        <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.6 }}></p>
                     </div>
 
                     {/* Description */}

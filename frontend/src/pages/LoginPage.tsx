@@ -125,7 +125,7 @@ export const LoginPage: React.FC = () => {
                     <div className="text-center mb-8">
                         <div className="text-5xl mb-4">🎓</div>
                         <h2 className="text-3xl font-bold mb-2" style={{ color: COLORS.dark }}>
-                            Welcome
+                            Clara Language School
                         </h2>
                         <p className="text-sm" style={{ color: COLORS.dark, opacity: 0.7 }}>
                             Sign in to access your learning portal

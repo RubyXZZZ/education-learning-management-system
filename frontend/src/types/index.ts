@@ -1,4 +1,3 @@
-
 // User Types (Base)
 export type UserRole = 'STUDENT' | 'INSTRUCTOR' | 'ADMIN';
 export type UserStatus = 'PENDING' | 'ACTIVE' | 'SUSPENDED' | 'INACTIVE';
@@ -32,9 +31,9 @@ export const USER_STATUS = {
 } as const;
 
 export const STUDENT_TYPE = {
-    FULL_TIME_ONLY: { value: 'FULL_TIME_ONLY', label: 'Full-time Only (F-1)' },
-    PART_TIME_ONLY: { value: 'PART_TIME_ONLY', label: 'Part-time Only (Tourist)' },
-    FLEXIBLE: { value: 'FLEXIBLE', label: 'Flexible (Citizen/PR)' }
+    FULL_TIME_ONLY: { value: 'FULL_TIME_ONLY', label: 'Full-time' },
+    PART_TIME_ONLY: { value: 'PART_TIME_ONLY', label: 'Part-time' },
+    FLEXIBLE: { value: 'FLEXIBLE', label: 'Flexible' }
 } as const;
 
 export const SESSION_STATUS = {
@@ -66,11 +65,7 @@ export const ASSIGNMENT_TYPE = {
 export const ENROLLMENT_STATUS = {
     ENROLLED: { value: 'ENROLLED', label: 'Enrolled', color: 'bg-blue-100 text-blue-700' },
     DROPPED: { value: 'DROPPED', label: 'Dropped', color: 'bg-gray-300 text-gray-600' },
-    // WAITLISTED: { value: 'WAITLISTED', label: 'Waitlisted', color: 'bg-yellow-100 text-yellow-700' },
     COMPLETED: { value: 'COMPLETED', label: 'Completed', color: 'bg-green-100 text-green-700' },
-    // CANCELED: { value: 'CANCELED', label: 'Canceled', color: 'bg-red-100 text-red-700' },
-    // WITHDRAWN: { value: 'WITHDRAWN', label: 'Withdrawn', color: 'bg-gray-300 text-gray-600' },
-    // PENDING: { value: 'PENDING', label: 'Pending', color: 'bg-yellow-100 text-yellow-700' }
 } as const;
 
 export const SUBMISSION_STATUS = {
@@ -160,9 +155,6 @@ export interface StudentRes {
     canEnrollCourse: boolean;
     // gpa: number | null;
     totalCoursesCompleted: number;
-    // totalCoursesPassed: number;
-    // totalCoursesFailed: number;
-    // passRate: number;
     enrollments?: EnrollmentRes[];
     createdAt: string;
     updatedAt: string;

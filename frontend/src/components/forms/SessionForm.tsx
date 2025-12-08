@@ -57,7 +57,6 @@ export const SessionForm: React.FC<SessionFormProps> = ({
                         onChange={(e) => setFormData({ ...formData, sessionCode: e.target.value })}
                         disabled={mode === 'edit'}
                         className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed"
-                        placeholder="2025-S1"
                     />
                     <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.6 }}>
                         Format: YYYY-S# (e.g., 2025-S1, 2025-S2, ...)

@@ -389,7 +389,6 @@ const BasicInfoFields: React.FC<BasicInfoFieldsProps> = ({ mode, formData, setFo
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-3 py-2 border rounded-lg"
-                        placeholder="+1 (555) 123-4567"
                     />
                 </div>
                 <div>
@@ -401,7 +400,6 @@ const BasicInfoFields: React.FC<BasicInfoFieldsProps> = ({ mode, formData, setFo
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         className="w-full px-3 py-2 border rounded-lg"
-                        placeholder="John"
                     />
                 </div>
                 <div>
@@ -413,7 +411,6 @@ const BasicInfoFields: React.FC<BasicInfoFieldsProps> = ({ mode, formData, setFo
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         className="w-full px-3 py-2 border rounded-lg"
-                        placeholder="Doe"
                     />
                 </div>
                 <div className="col-span-2">
@@ -425,7 +422,6 @@ const BasicInfoFields: React.FC<BasicInfoFieldsProps> = ({ mode, formData, setFo
                         value={formData.address}
                         onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         className="w-full px-3 py-2 border rounded-lg"
-                        placeholder="123 Main St, City, State 12345"
                     />
                 </div>
                 <div>
@@ -472,12 +468,12 @@ const StudentSpecificFields: React.FC<StudentSpecificFieldsProps> = ({
                                                                      }) => {
     // Hardcoded levels (temporary until backend provides API)
     const levels = [
-        { value: '1', label: 'Level 1 (A1 - Beginner)' },
-        { value: '2', label: 'Level 2 (A2 - Elementary)' },
-        { value: '3', label: 'Level 3 (B1 - Intermediate)' },
-        { value: '4', label: 'Level 4 (B2 - Upper-Intermediate)' },
-        { value: '5', label: 'Level 5 (C1 - Advanced)' },
-        { value: '6', label: 'Level 6 (C1 - Proficiency)' }
+        { value: '1', label: 'Level 1' },
+        { value: '2', label: 'Level 2' },
+        { value: '3', label: 'Level 3' },
+        { value: '4', label: 'Level 4' },
+        { value: '5', label: 'Level 5' },
+        { value: '6', label: 'Level 6' }
     ];
 
     return (
@@ -593,7 +589,6 @@ const StudentSpecificFields: React.FC<StudentSpecificFieldsProps> = ({
                                 value={formData.emergencyContact}
                                 onChange={(e) => setFormData({ ...formData, emergencyContact: e.target.value })}
                                 className="w-full px-3 py-2 border rounded-lg"
-                                placeholder="Jane Doe"
                             />
                         </div>
                         <div>
@@ -605,7 +600,6 @@ const StudentSpecificFields: React.FC<StudentSpecificFieldsProps> = ({
                                 value={formData.emergencyPhone}
                                 onChange={(e) => setFormData({ ...formData, emergencyPhone: e.target.value })}
                                 className="w-full px-3 py-2 border rounded-lg"
-                                placeholder="+1 (555) 987-6543"
                             />
                         </div>
                     </div>

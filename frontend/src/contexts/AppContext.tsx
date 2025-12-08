@@ -57,12 +57,9 @@ interface AppContextActions {
 
 type AppContextType = AppContextState & AppContextActions;
 
-// ==================== Context ====================
-
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// ==================== Provider ====================
-
+// Provider
 interface AppProviderProps {
     children: ReactNode;
 }
@@ -79,7 +76,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         errors: {}
     });
 
-    // ==================== Initialization ====================
+    // Initialization
 
     useEffect(() => {
         // Wait for Firebase Auth to initialize before loading data
@@ -131,7 +128,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }, []);
 
 
-    // ==================== Session Management ====================
+    // Session Management
 
     const loadSessions = async () => {
         try {
@@ -174,7 +171,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
 
 
-    // ==================== Auth Management ====================
+    // Auth Management
 
     const loadCurrentUser = async () => {
         try {
@@ -350,11 +347,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     );
 };
 
-// ==================== Custom Hooks ====================
 
-/**
- * Main hook to access app context
- */
+//Main hook to access app context
+
 export const useApp = (): AppContextType => {
     const context = useContext(AppContext);
     if (!context) {
@@ -363,9 +358,7 @@ export const useApp = (): AppContextType => {
     return context;
 };
 
-/**
- * Hook for session-related data
- */
+//Hook for session-related data
 export const useSession = () => {
     const { currentSession, allSessions, refreshSessions, loading, errors } = useApp();
 
@@ -378,9 +371,7 @@ export const useSession = () => {
     };
 };
 
-/**
- * Hook for authentication state
- */
+//Hook for authentication state
 export const useAuth = () => {
     const { currentUser, login, logout, loading, errors, clearError } = useApp();
 

@@ -19,13 +19,15 @@ public interface CourseRepo extends JpaRepository<Course, String> {
     @Query("SELECT DISTINCT c FROM Course c " +
             "LEFT JOIN FETCH c.session " +
             "LEFT JOIN FETCH c.prerequisiteCourses " +
-            "LEFT JOIN FETCH c.sections")
+            "LEFT JOIN FETCH c.sections " +
+            "ORDER BY c.session.sessionCode DESC, c.courseCode ASC")
     List<Course> findAllWithRelations();
 
 
     @Query("SELECT c FROM Course c " +
             "LEFT JOIN FETCH c.session " +
             "LEFT JOIN FETCH c.prerequisiteCourses " +
+            "LEFT JOIN FETCH c.sections " +
             "WHERE c.id = :id")
     Optional<Course> findByIdWithRelations(@Param("id") String id);
 

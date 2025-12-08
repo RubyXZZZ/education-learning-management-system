@@ -289,14 +289,19 @@ export const MyCourses: React.FC = () => {
 
     const calculateStudentGrade = (studentId: string) => {
         const studentSubs = allSubmissions.filter(s => s.studentId === studentId);
+
         const gradedAssignments = assignments.filter(a =>
             studentSubs.find(s => s.assignmentId === a.id && s.grade !== null)
         );
 
         const totalPoints = gradedAssignments.reduce((sum, a) => sum + a.totalPoints, 0);
-        const earnedPoints = studentSubs
-            .filter(s => s.grade !== null)
-            .reduce((sum, s) => sum + (s.grade || 0), 0);
+
+        const earnedPoints = gradedAssignments.reduce((sum, assignment) => {
+            const sub = studentSubs.find(s =>
+                s.assignmentId === assignment.id && s.grade !== null
+            );
+            return sum + (sub?.grade || 0);
+        }, 0);
 
         const percentage = totalPoints > 0
             ? parseFloat(((earnedPoints / totalPoints) * 100).toFixed(2))
@@ -306,7 +311,7 @@ export const MyCourses: React.FC = () => {
             totalPoints,
             earnedPoints,
             percentage,
-            percentageDisplay: totalPoints > 0 ? percentage.toFixed(1) : '-'
+            percentageDisplay: totalPoints > 0 ? `${percentage.toFixed(1)}%` : '-'  // 添加 %
         };
     };
 
@@ -640,8 +645,6 @@ export const MyCourses: React.FC = () => {
                         { key: 'assignments', label: 'Assignments' },
                         { key: 'grades', label: 'Grades' },
                         { key: 'people', label: 'People' },
-                        { key: 'announcements', label: 'Announcements' },
-                        { key: 'attendance', label: 'Attendance' }
                     ].map(tab => (
                         <button
                             key={tab.key}
@@ -1261,24 +1264,6 @@ export const MyCourses: React.FC = () => {
                                     />
                                 )}
                             </div>
-                        </div>
-                    )}
-
-                    {/* Announcements Tab */}
-                    {activeTab === 'announcements' && (
-                        <div className="text-center py-12">
-                            <p className="text-sm" style={{ color: COLORS.dark, opacity: 0.5 }}>
-                                No announcements
-                            </p>
-                        </div>
-                    )}
-
-                    {/* Attendance Tab */}
-                    {activeTab === 'attendance' && (
-                        <div className="text-center py-12">
-                            <p className="text-sm" style={{ color: COLORS.dark, opacity: 0.5 }}>
-                                Attendance tracking coming soon
-                            </p>
                         </div>
                     )}
                 </div>

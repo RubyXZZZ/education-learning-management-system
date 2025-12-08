@@ -132,7 +132,7 @@ export const SectionForm: React.FC<SectionFormProps> = ({
     };
 
     const availableInstructors = mode === 'edit'
-        ? instructors  // Edit: all
+        ? instructors
         : instructors.filter(i => i.status === 'ACTIVE'); // Create: only active
 
     // Instructor options for react-select
@@ -231,12 +231,11 @@ export const SectionForm: React.FC<SectionFormProps> = ({
                         value={formData.sectionCode}
                         disabled={mode === 'edit'}
                         onChange={(e) => setFormData({ ...formData, sectionCode: e.target.value.toUpperCase() })}
-                        placeholder="A"
                         className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100 disabled:cursor-not-allowed"
                         style={{ borderColor: COLORS.bg }}
                     />
                     <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                        e.g., A, B, C, or A1, B1
+                        e.g S001
                     </p>
                 </div>
 

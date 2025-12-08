@@ -53,12 +53,6 @@ public class CourseService {
      * Create a new course template
      */
     public CourseRes createCourse(CreateCourseReq request) {
-        // Validate course code uniqueness
-        if (courseRepo.existsByCourseCode(request.getCourseCode())) {
-            throw new IllegalArgumentException(
-                    "Course code already exists: " + request.getCourseCode()
-            );
-        }
 
         Session session = sessionRepo.findById(request.getSessionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Session", request.getSessionId()));
