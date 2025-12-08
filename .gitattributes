@@ -1,4 +1,4 @@
-# Package manager lockfiles (usually 20k+ lines)
+# Package manager lockfiles
 **/package-lock.json linguist-generated
 **/yarn.lock linguist-generated
 **/pnpm-lock.yaml linguist-generated
@@ -12,17 +12,6 @@
 **/.eslintrc* linguist-generated
 **/.prettierrc* linguist-generated
 
-# Backend config
-**/pom.xml linguist-generated
-**/application*.properties linguist-generated
-**/application*.yml linguist-generated
 
-# Documentation
-*.md linguist-documentation
 
-# Test files (optional - if you want to exclude)
-**/test/** linguist-vendored
-**/tests/** linguist-vendored
-**/*.test.ts linguist-vendored
-**/*.test.tsx linguist-vendored
-**/*.spec.ts linguist-vendored
+
