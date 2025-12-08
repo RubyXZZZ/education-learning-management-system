@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Mail, ChevronRight, Users, BookOpen, GraduationCap, Award } from 'lucide-react';
+import {ChevronRight, Users, BookOpen, GraduationCap, Award } from 'lucide-react';
 import { COLORS } from '../constants/colors';
 import { studentApi, instructorApi, sectionApi, enrollmentApi } from '../services/api';
 import { useAuth } from '../contexts/AppContext';
@@ -155,9 +155,6 @@ const StudentContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ on
                     </div>
                 )}
             </div>
-
-            {/* Tasks & Notifications */}
-            <TasksNotificationsPanel role="STUDENT" onNavigate={onNavigate} />
         </>
     );
 };
@@ -249,9 +246,6 @@ const InstructorContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({
                     </div>
                 )}
             </div>
-
-            {/* Tasks & Notifications */}
-            <TasksNotificationsPanel role="INSTRUCTOR" onNavigate={onNavigate} />
         </>
     );
 };
@@ -325,9 +319,6 @@ const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNa
                     onClick={() => onNavigate('users-management')}
                 />
             </div>
-
-            {/* Tasks & Notifications */}
-            <TasksNotificationsPanel role="ADMIN" onNavigate={onNavigate} />
         </>
     );
 };
@@ -352,127 +343,6 @@ const StatCard: React.FC<{
                 </span>
             </div>
             <div className="text-sm" style={{ color: COLORS.dark, opacity: 0.6 }}>{label}</div>
-        </div>
-    );
-};
-
-// Tasks & Notifications Panel (All Roles)
-const TasksNotificationsPanel: React.FC<{
-    role: 'STUDENT' | 'INSTRUCTOR' | 'ADMIN';
-    onNavigate: (view: ViewType) => void;
-}> = ({ role }) => {
-
-    // Mock tasks - TODO: Replace with real data
-    const studentTasks = [
-        { id: 1, title: 'Homework 5', course: 'ESL-LS-L3', dueDate: 'Today', type: 'assignment' },
-        { id: 2, title: 'Essay Draft', course: 'ESL-RW-L3', dueDate: 'Tomorrow', type: 'assignment' }
-    ];
-
-    const instructorTasks = [
-        { id: 1, title: 'Grade Homework', course: 'ESL-LS-L1-A', count: 15, type: 'grading' },
-        { id: 2, title: 'Record Attendance', course: 'ESL-LS-L1-B', count: 2, type: 'attendance' }
-    ];
-
-    const adminTasks = [
-        { id: 1, title: 'Students pending placement test', count: 12, type: 'pending' },
-        { id: 2, title: 'Sections below min enrollment', count: 5, type: 'alert' },
-        { id: 3, title: 'Instructors at max load', count: 3, type: 'alert' }
-    ];
-
-    const notifications = [
-        { id: 1, from: 'Teacher Li', message: 'Feedback on your essay', time: '2h ago', unread: true },
-        { id: 2, from: 'System', message: 'Grade posted: ESL-LS-L3', time: '1d ago', unread: true }
-    ];
-
-    const currentTasks = role === 'STUDENT' ? studentTasks :
-        role === 'INSTRUCTOR' ? instructorTasks : adminTasks;
-
-    return (
-        <div className="bg-white rounded-3xl p-6 shadow-sm" style={{ border: `1px solid ${COLORS.bg}` }}>
-            <div className="grid grid-cols-2 gap-6">
-                {/* Left: To Do */}
-                <div>
-                    <h3 className="font-semibold mb-3 flex items-center space-x-2" style={{ color: COLORS.dark }}>
-                        <AlertCircle size={18} className="text-red-600" />
-                        <span>To Do ({currentTasks.length})</span>
-                    </h3>
-                    <div className="space-y-2">
-                        {currentTasks.map(task => (
-                            <div
-                                key={task.id}
-                                className="p-3 bg-orange-50 rounded-lg cursor-pointer hover:bg-orange-100 transition-colors"
-                                style={{ borderLeft: `4px solid ${COLORS.orange}` }}
-                            >
-                                <h4 className="font-medium text-sm" style={{ color: COLORS.dark }}>
-                                    {task.title}
-                                    {'count' in task && ` (${task.count})`}
-                                </h4>
-                                {'course' in task && (
-                                    <p className="text-xs" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                                        {task.course}
-                                    </p>
-                                )}
-                                {'dueDate' in task && (
-                                    <p className="text-xs" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                                        Due: {task.dueDate}
-                                    </p>
-                                )}
-                            </div>
-                        ))}
-
-                        {currentTasks.length === 0 && (
-                            <p className="text-center py-4 text-sm" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                                No pending tasks
-                            </p>
-                        )}
-                    </div>
-                </div>
-
-                {/* Right: Notifications */}
-                <div>
-                    <h3 className="font-semibold mb-3 flex items-center justify-between" style={{ color: COLORS.dark }}>
-                        <span className="flex items-center space-x-2">
-                            <Mail size={18} className="text-blue-600" />
-                            <span>Notifications</span>
-                        </span>
-                        {notifications.filter(n => n.unread).length > 0 && (
-                            <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                                {notifications.filter(n => n.unread).length}
-                            </span>
-                        )}
-                    </h3>
-                    <div className="space-y-2">
-                        {notifications.map(notif => (
-                            <div
-                                key={notif.id}
-                                className={`p-3 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors ${
-                                    notif.unread ? 'bg-blue-50' : 'bg-white'
-                                }`}
-                                style={{ border: `1px solid ${COLORS.bg}` }}
-                            >
-                                <div className="flex items-start space-x-2">
-                                    <Mail size={14} className="text-blue-500 mt-0.5" />
-                                    <div className="flex-1">
-                                        <div className="text-xs font-medium mb-1" style={{ color: COLORS.dark }}>
-                                            {notif.from}
-                                        </div>
-                                        <h4 className="text-sm" style={{ color: COLORS.dark }}>{notif.message}</h4>
-                                        <p className="text-xs mt-1" style={{ color: COLORS.dark, opacity: 0.5 }}>
-                                            {notif.time}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                        {notifications.length === 0 && (
-                            <p className="text-center py-4 text-sm" style={{ color: COLORS.dark, opacity: 0.6 }}>
-                                No notifications
-                            </p>
-                        )}
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };
