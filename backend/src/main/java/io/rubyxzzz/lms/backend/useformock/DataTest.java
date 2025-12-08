@@ -1,4 +1,4 @@
-package io.rubyxzzz.lms.backend.tstdata;
+package io.rubyxzzz.lms.backend.useformock;
 
 public class DataTest {
 
