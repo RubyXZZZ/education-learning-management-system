@@ -44,3 +44,14 @@ logs/
 docs/build/
 docs/_build/.idea/
 *.iml
+
+# Backend sensitive files
+**/application-local.yml
+**/application-dev.yml
+**/application-prod.yml
+**/service-account-key.json
+backend/.env
+
+# Keep only these config templates
+!**/application.yml
+!**/.env.example
