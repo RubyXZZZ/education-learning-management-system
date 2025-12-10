@@ -14,7 +14,7 @@ import { BaseUserForm } from '../components/forms/BaseUserForm';
 import { useAuth } from '../contexts/AppContext';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../services/firebase';
-import { Mail, Download, Trash2 } from 'lucide-react';
+import { Mail, Trash2 } from 'lucide-react';
 import type { StudentList, InstructorList, AdminList, StudentRes, InstructorRes, AdminRes } from '../types';
 
 export const UsersMgmt: React.FC = () => {
@@ -552,12 +552,6 @@ export const UsersMgmt: React.FC = () => {
                                 icon: <Mail size={16} />,
                                 variant: 'secondary',
                                 onClick: handleBatchSendActivation
-                            },
-                            {
-                                label: 'Export',
-                                icon: <Download size={16} />,
-                                variant: 'secondary',
-                                onClick: () => alert('Export feature coming soon')
                             },
                             {
                                 label: 'Delete',
