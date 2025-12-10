@@ -11,6 +11,22 @@ interface DashboardProps {
     onNavigate: (view: ViewType) => void;
 }
 
+// Add banner image
+const BannerImage: React.FC = () => {
+    return (
+        <div className="w-full rounded-3xl overflow-hidden shadow-sm"
+             style={{ border: `1px solid ${COLORS.bg}` }}>
+            <img
+                src="/banner.png"
+                alt="Clara Language School Banner"
+                className="w-full h-auto object-cover"
+                style={{ maxHeight: '300px' }}
+            />
+        </div>
+    );
+};
+
+// Then modify the Dashboard component to include the banner:
 export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     const { currentUser, isStudent, isInstructor, isAdmin } = useAuth();
 
@@ -25,6 +41,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {isStudent && <StudentContent onNavigate={onNavigate} />}
             {isInstructor && <InstructorContent onNavigate={onNavigate} />}
             {isAdmin && <AdminContent onNavigate={onNavigate} />}
+
+            {/* Banner at bottom */}
+            <BannerImage />
         </div>
     );
 };
@@ -250,7 +269,6 @@ const InstructorContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({
     );
 };
 
-// Admin Content Component
 // Admin Content Component
 const AdminContent: React.FC<{ onNavigate: (view: ViewType) => void }> = ({ onNavigate }) => {
     const [stats, setStats] = useState({
