@@ -223,7 +223,7 @@ export const BaseUserForm: React.FC<BaseUserFormProps> = ({
         <div className="space-y-6">
             <h3 className="text-xl font-bold" style={{ color: COLORS.dark }}>
                 {mode === 'create'
-                    ? `Create ${userTypeLabel}${userType === 'student' ? ' (Walk-in Registration)' : ''}`
+                    ? `Create ${userTypeLabel}`
                     : `Edit ${userTypeLabel}`
                 }
             </h3>
